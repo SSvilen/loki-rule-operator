@@ -10,7 +10,7 @@ steps:
   - name: build
     image: plugins/docker
     settings:
-      repo: foo/bar
+      repo: svilen/loki-rule-operator
       username:
         from_secret: dockerhub_username
       password:
