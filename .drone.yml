@@ -24,6 +24,7 @@ steps:
         from_secret: dockerhub_username
       password:
         from_secret: dockerhub_password
+      tags: manifest-arm64
 ---
 kind: pipeline
 type: docker
@@ -50,3 +51,21 @@ steps:
         from_secret: dockerhub_username
       password:
         from_secret: dockerhub_password
+      tags: manifest-amd64
+---
+kind: pipeline
+name: push manifest
+
+steps:
+  - name: manifest
+    image: plugins/manifest
+    settings:
+      username:
+        from_secret: dockerhub_username
+      password:
+        from_secret: dockerhub_password
+      target: svil/loki-rule-operator:latest
+      template: svil/loki-rule-operator:latest-OS-ARCH
+      platforms:
+        - linux/amd64
+        - linux/arm64
