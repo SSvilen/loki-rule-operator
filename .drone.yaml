@@ -13,7 +13,7 @@ steps:
     settings:
       repo: foo/bar
       username:
-        from_secret: docker_username
+        from_secret: dockerhub_username
       password:
         from_secret: docker_password
 ---
