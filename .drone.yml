@@ -9,6 +9,9 @@ platform:
 steps:
   - name: codebuild
     image: golang
+    volumes:
+      - name: dependencies
+        path: /go
     commands:
       - go build
   - name: imagebuild
