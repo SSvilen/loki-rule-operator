@@ -20,10 +20,6 @@ steps:
     image: plugins/docker
     settings:
       repo: svil/loki-rule-operator
-      username:
-        from_secret: dockerhub_username
-      password:
-        from_secret: dockerhub_password
       tags: latest-linux-arm64
 ---
 kind: pipeline
@@ -47,10 +43,6 @@ steps:
     image: plugins/docker
     settings:
       repo: svil/loki-rule-operator
-      username:
-        from_secret: dockerhub_username
-      password:
-        from_secret: dockerhub_password
       tags: latest-linux-amd64
 ---
 kind: pipeline
