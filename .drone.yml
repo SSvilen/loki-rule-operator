@@ -23,6 +23,10 @@ steps:
         path: /var/run/docker.sock
     commands:
       - docker build --no-cache -t svil/loki-rule-operator:latest-linux-arm64 .
+volumes:
+  - name: docker_sock
+    host:
+      path: /var/run/docker.sock
 ---
 kind: pipeline
 type: docker
@@ -48,6 +52,10 @@ steps:
         path: /var/run/docker.sock
     commands:
       - docker build --no-cache -t svil/loki-rule-operator:latest-linux-amd64 .
+volumes:
+  - name: docker_sock
+    host:
+      path: /var/run/docker.sock
 ---
 kind: pipeline
 type: docker
