@@ -27,7 +27,7 @@ steps:
 ---
 kind: pipeline
 type: docker
-name: arm64 Image
+name: amd64 Image
 
 platform:
   os: linux
