@@ -54,6 +54,7 @@ steps:
       tags: manifest-amd64
 ---
 kind: pipeline
+type: docker
 name: push manifest
 
 steps:
@@ -69,3 +70,6 @@ steps:
       platforms:
         - linux/amd64
         - linux/arm64
+depends_on:
+  - arm64 Image
+  - amd64 Image
