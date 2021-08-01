@@ -17,7 +17,7 @@ steps:
       - go mod tidy
       - go build -o loki-rule-operator
   - name: imagebuild
-    image: docker:latest
+    image: docker:dind
     volumes:
       - name: docker_sock
         path: /var/run/docker.sock
@@ -46,7 +46,7 @@ steps:
       - go mod tidy
       - go build -o loki-rule-operator
   - name: imagebuild
-    image: docker:latest
+    image: docker:dind
     volumes:
       - name: docker_sock
         path: /var/run/docker.sock
