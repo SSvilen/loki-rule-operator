@@ -13,7 +13,7 @@ steps:
       - name: dependencies
         path: /go
     commands:
-      - go build
+      - go build -o loki-rule-operator
   - name: imagebuild
     image: plugins/docker
     settings:
