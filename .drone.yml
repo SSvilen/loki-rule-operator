@@ -17,10 +17,12 @@ steps:
       - go mod tidy
       - go build -o loki-rule-operator
   - name: imagebuild
-    image: plugins/docker
-    settings:
-      repo: svil/loki-rule-operator
-      tags: latest-linux-arm64
+    image: docker:latest
+    volumes:
+      - name: docker_sock
+        path: /var/run/docker.sock
+    commands:
+      - docker build --no-cache -t svil/loki-rule-operator:latest-linux-arm64 .
 ---
 kind: pipeline
 type: docker
@@ -40,10 +42,12 @@ steps:
       - go mod tidy
       - go build -o loki-rule-operator
   - name: imagebuild
-    image: plugins/docker
-    settings:
-      repo: svil/loki-rule-operator
-      tags: latest-linux-amd64
+    image: docker:latest
+    volumes:
+      - name: docker_sock
+        path: /var/run/docker.sock
+    commands:
+      - docker build --no-cache -t svil/loki-rule-operator:latest-linux-amd64 .
 ---
 kind: pipeline
 type: docker
