@@ -1,3 +1,4 @@
+---
 kind: pipeline
 type: docker
 name: arm64 Image
@@ -5,6 +6,32 @@ name: arm64 Image
 platform:
   os: linux
   arch: arm64
+
+steps:
+  - name: codebuild
+    image: golang
+    volumes:
+      - name: dependencies
+        path: /go
+    commands:
+      - go mod tidy
+      - go build -o loki-rule-operator
+  - name: imagebuild
+    image: plugins/docker
+    settings:
+      repo: svil/loki-rule-operator
+      username:
+        from_secret: dockerhub_username
+      password:
+        from_secret: dockerhub_password
+---
+kind: pipeline
+type: docker
+name: arm64 Image
+
+platform:
+  os: linux
+  arch: amd64
 
 steps:
   - name: codebuild
