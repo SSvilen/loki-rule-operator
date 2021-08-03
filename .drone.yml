@@ -24,7 +24,9 @@ steps:
         from_secret: dockerhub_username
       password:
         from_secret: dockerhub_password
-      tags: latest-linux-arm64
+      tags:
+        - latest-linux-arm64
+        - ${DRONE_COMMIT_REF}
 ---
 kind: pipeline
 type: docker
@@ -51,7 +53,9 @@ steps:
         from_secret: dockerhub_username
       password:
         from_secret: dockerhub_password
-      tags: latest-linux-amd64
+      tags:
+        - latest-linux-amd64
+        - ${DRONE_COMMIT_REF}
 ---
 kind: pipeline
 type: docker
