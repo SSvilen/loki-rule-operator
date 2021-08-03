@@ -12,7 +12,7 @@ steps:
     image: docker:git
     commands:
       - git fetch --tags
-      - echo -n "latest,$(git describe --tags --abbrev=0)" > .tags # that's how one can feed tags to the docker pluging. Not very well documented tbh..
+      - echo -n "latest-linux-arm64,$(git describe --tags --abbrev=0)" > .tags # that's how one can feed tags to the docker pluging. Not very well documented tbh..
   - name: codebuild
     image: golang
     commands:
@@ -40,12 +40,9 @@ steps:
     image: docker:git
     commands:
       - git fetch --tags
-      - echo -n "latest,$(git describe --tags --abbrev=0)" > .tags # that's how one can feed tags to the docker pluging. Not very well documented tbh..
+      - echo -n "latest-linux-amd64,$(git describe --tags --abbrev=0)" > .tags # that's how one can feed tags to the docker pluging. Not very well documented tbh..
   - name: codebuild
     image: golang
-    volumes:
-      - name: dependencies
-        path: /go
     commands:
       - go mod tidy
       - go build -o loki-rule-operator
