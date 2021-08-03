@@ -16,6 +16,7 @@ steps:
     commands:
       - go mod tidy
       - go build -o loki-rule-operator
+      - echo $(git describe --tags --abbrev=0) > .tags # that's how one can feed tags to the docker pluging. Not very well documented tbh..
   - name: imagebuild
     image: plugins/docker
     settings:
@@ -24,9 +25,6 @@ steps:
         from_secret: dockerhub_username
       password:
         from_secret: dockerhub_password
-      tags:
-        - latest-linux-arm64
-        - ${DRONE_TAG}
 ---
 kind: pipeline
 type: docker
@@ -55,7 +53,7 @@ steps:
         from_secret: dockerhub_password
       tags:
         - latest-linux-amd64
-        - ${DRONE_TAG}
+        - $${DRONE_TAG}
 ---
 kind: pipeline
 type: docker
