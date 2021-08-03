@@ -10,12 +10,12 @@ platform:
 steps:
   - name: codebuild
     image: golang
-    volumes:
-      - name: dependencies
-        path: /go
     commands:
       - go mod tidy
       - go build -o loki-rule-operator
+  - name: create tag
+    image: docker:git
+    commands:
       - echo -n "latest,$(git describe --tags --abbrev=0)" > .tags # that's how one can feed tags to the docker pluging. Not very well documented tbh..
   - name: imagebuild
     image: plugins/docker
