@@ -12,7 +12,7 @@ steps:
     image: docker:git
     commands:
       - git fetch --tags
-      - echo -n "latest-linux-arm64,$(git describe --tags --abbrev=0)" > .tags # that's how one can feed tags to the docker pluging. Not very well documented tbh..
+      - echo -n "latest-linux-arm64,$(git describe --tags --abbrev=0)-linux-arm64" > .tags # that's how one can feed tags to the docker pluging. Not very well documented tbh..
   - name: codebuild
     image: golang
     commands:
@@ -40,7 +40,7 @@ steps:
     image: docker:git
     commands:
       - git fetch --tags
-      - echo -n "latest-linux-amd64,$(git describe --tags --abbrev=0)" > .tags # that's how one can feed tags to the docker pluging. Not very well documented tbh..
+      - echo -n "latest-linux-amd64,$(git describe --tags --abbrev=0)-linux-amd64" > .tags # that's how one can feed tags to the docker pluging. Not very well documented tbh..
   - name: codebuild
     image: golang
     commands:
@@ -60,6 +60,11 @@ type: docker
 name: push manifest
 
 steps:
+  - name: create tag
+    image: docker:git
+    commands:
+      - git fetch --tags
+      - echo -n "latest-linux-arm64,$(git describe --tags --abbrev=0)" > tag
   - name: manifest
     image: plugins/manifest
     settings:
