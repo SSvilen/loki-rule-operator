@@ -60,11 +60,6 @@ type: docker
 name: push manifest
 
 steps:
-  - name: create tag
-    image: docker:git
-    commands:
-      - git fetch --tags
-      - echo -n "latest-linux-arm64,$(git describe --tags --abbrev=0)" > tag
   - name: manifest
     image: plugins/manifest
     settings:
